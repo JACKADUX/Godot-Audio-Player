@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3kobiipq2jbo"]
+
+[ext_resource type="Script" path="res://components/custom_window_bar/custom_window_bar.gd" id="1_5unlh"]
+[ext_resource type="Script" path="res://components/custom_window_bar/window_state_component.gd" id="2_hnrtg"]
+[ext_resource type="Script" path="res://components/custom_window_bar/window_drag_component.gd" id="2_lons0"]
+[ext_resource type="Texture2D" uid="uid://vxab15tqulfs" path="res://resource/icons/folder/folder_normal-01.png" id="4_l7vv8"]
+[ext_resource type="Texture2D" uid="uid://chlb3t2v7n30m" path="res://resource/icons/minimize/minimize_normal-01.png" id="4_vs6wu"]
+[ext_resource type="Texture2D" uid="uid://bqv6wngjhsmlh" path="res://resource/icons/minimize/minimize_pressed-01.png" id="5_3owje"]
+[ext_resource type="Texture2D" uid="uid://h735jcx43h18" path="res://resource/icons/folder/folder_pressed-01.png" id="5_hkh00"]
+[ext_resource type="Texture2D" uid="uid://bwmq7w3avlodq" path="res://resource/icons/close/close_norma-01.png" id="7_nwn5w"]
+[ext_resource type="Texture2D" uid="uid://1emwac2vvce5" path="res://resource/icons/close/close_pressed-01.png" id="8_r4j6c"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_palyh"]
+load_path = "res://.godot/imported/expand_normal-01.png-53d2fb41f9b418fb79f48749a671a0e5.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xuaw1"]
+load_path = "res://.godot/imported/expand_pressed-01.png-51a3351e4574aa3707deb725309d7e84.ctex"
+
+[node name="CustomWindowBar" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+script = ExtResource("1_5unlh")
+
+[node name="WindowStateComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_hnrtg")
+
+[node name="WindowDragComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_lons0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="ButtonOpen" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_l7vv8")
+texture_pressed = ExtResource("5_hkh00")
+
+[node name="ButtonClaps" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("CompressedTexture2D_palyh")
+texture_pressed = SubResource("CompressedTexture2D_xuaw1")
+
+[node name="ControlTitleArea" type="Control" parent="HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="LabelWindowTitle" type="Label" parent="HBoxContainer/ControlTitleArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Audio Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="LabelAudioTitle" type="Label" parent="HBoxContainer/ControlTitleArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "JACKADUX"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="BtnMinimizeWindow" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_vs6wu")
+texture_pressed = ExtResource("5_3owje")
+texture_hover = ExtResource("4_vs6wu")
+
+[node name="BtnCloseWindow" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("7_nwn5w")
+texture_pressed = ExtResource("8_r4j6c")
+texture_hover = ExtResource("7_nwn5w")

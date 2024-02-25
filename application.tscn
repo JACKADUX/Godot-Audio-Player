@@ -1,0 +1,148 @@
+[gd_scene load_steps=18 format=3 uid="uid://htca7opqnv3j"]
+
+[ext_resource type="Script" path="res://application.gd" id="1_d780q"]
+[ext_resource type="Theme" uid="uid://dutg53f3loobx" path="res://resource/theme/main_theme.tres" id="1_ly5s6"]
+[ext_resource type="PackedScene" uid="uid://cst6fj3qg1tt3" path="res://components/audio_info_panel/audio_info_panel.tscn" id="2_upe2c"]
+[ext_resource type="PackedScene" uid="uid://b3kobiipq2jbo" path="res://components/custom_window_bar/custom_window_bar.tscn" id="2_ympk3"]
+[ext_resource type="Script" path="res://scripts/free_parent_when_start.gd" id="3_sqcr4"]
+[ext_resource type="Texture2D" uid="uid://ks3oac2khkey" path="res://resource/icons/forward/forward_hover-01.png" id="6_gkd60"]
+[ext_resource type="Texture2D" uid="uid://dyvg6ejfp3nfw" path="res://resource/icons/forward/forward_pressed-01.png" id="7_oh2xr"]
+[ext_resource type="Texture2D" uid="uid://ca6p34n7a2cl2" path="res://resource/icons/forward/forward_normal-01.png" id="8_extb8"]
+[ext_resource type="Texture2D" uid="uid://sewug13wt41g" path="res://resource/icons/forward/forward_disable-01.png" id="9_sds3d"]
+[ext_resource type="Texture2D" uid="uid://1cw2andiey2i" path="res://resource/icons/play/play_hover-01.png" id="10_405js"]
+[ext_resource type="Texture2D" uid="uid://btjon3f8equrt" path="res://resource/icons/play/play_pressed-01.png" id="11_7ha5p"]
+[ext_resource type="Texture2D" uid="uid://bfwu4j8kiupcw" path="res://resource/icons/play/play_normal-01.png" id="12_rfadg"]
+[ext_resource type="Texture2D" uid="uid://jn6rmm00h1se" path="res://resource/icons/pause/pause_normal-01.png" id="13_0u5xr"]
+[ext_resource type="Texture2D" uid="uid://bxj3nveamxwwv" path="res://resource/icons/pause/pause_pressed-01.png" id="14_ijtsq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gphi7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2krt"]
+bg_color = Color(0.917647, 0.917647, 0.917647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gkpdi"]
+load_path = "res://.godot/imported/pause_hover-01.png-ba012eb79b0a9d1603e7c24ba0894719.ctex"
+
+[node name="Application" type="PanelContainer"]
+clip_children = 2
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ly5s6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gphi7")
+script = ExtResource("1_d780q")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CustomWindowBar" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_ympk3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AudioInfosManager" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AudioInfoPanel" parent="MarginContainer/VBoxContainer/ScrollContainer/AudioInfosManager" instance=ExtResource("2_upe2c")]
+layout_mode = 2
+
+[node name="FPWS" type="Node" parent="MarginContainer/VBoxContainer/ScrollContainer/AudioInfosManager/AudioInfoPanel"]
+script = ExtResource("3_sqcr4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelBefore" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.403922)
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="SliderBar" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_e2krt")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_e2krt")
+max_value = 0.0
+step = 0.01
+
+[node name="LabelAfter" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.403922)
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="ButtonPrev" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("8_extb8")
+texture_pressed = ExtResource("7_oh2xr")
+texture_hover = ExtResource("6_gkd60")
+texture_disabled = ExtResource("9_sds3d")
+flip_h = true
+
+[node name="ButtonPlay" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("12_rfadg")
+texture_pressed = ExtResource("11_7ha5p")
+texture_hover = ExtResource("10_405js")
+
+[node name="ButtonPause" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture_normal = ExtResource("13_0u5xr")
+texture_pressed = ExtResource("14_ijtsq")
+texture_hover = SubResource("CompressedTexture2D_gkpdi")
+
+[node name="ButtonNext" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("8_extb8")
+texture_pressed = ExtResource("7_oh2xr")
+texture_hover = ExtResource("6_gkd60")
+texture_disabled = ExtResource("9_sds3d")

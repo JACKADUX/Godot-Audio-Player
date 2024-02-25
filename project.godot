@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotAudioPlayer"
+run/main_scene="res://application.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[autoload]
+
+AudioManager="*res://globals/audio_manager.gd"
+AudioPlayer="*res://globals/audio_player.gd"
+
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=120
+window/size/borderless=true
+window/size/transparent=true
+window/per_pixel_transparency/allowed=true
+
+[gui]
+
+theme/custom_font="res://resource/font/SmileySans/SmileySans-Oblique.otf"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+viewport/transparent_background=true
