@@ -39,7 +39,7 @@ func _ready():
 	)
 	
 	AudioManager.audio_datas_changed.connect(func():
-		AudioPlayer.stop()
+		AudioPlayer.stop_audio()
 		for child in audio_infos_manager.get_children():
 			audio_infos_manager.remove_child(child)
 			child.queue_free()
@@ -59,7 +59,7 @@ func _ready():
 					AudioPlayer.play_audio()
 				else:
 					AudioPlayer.stop_audio()
-				)
+			)
 			index += 1
 		if audio_infos_manager.get_child_count() != 0:
 			AudioManager.set_current_index(0)

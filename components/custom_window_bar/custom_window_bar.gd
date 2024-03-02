@@ -70,11 +70,6 @@ func _gui_input(event):
 		
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
-			if window_state_component.is_maxsimized():
-				# 全屏状态下拖拽会缩小窗口
-				window_state_component.set_windowed()
-				var win_size = DisplayServer.window_get_size()*0.5
-				DisplayServer.window_set_position(DisplayServer.mouse_get_position()-Vector2i(win_size.x,20))
 			if not window_drag_component.is_dragging():
 				window_drag_component.start_drag()
 			
