@@ -22,13 +22,13 @@ func init_audio(file_path:String):
 		return 
 	current_file = file_path
 	current_time = 0
-	stream = load(file_path)
+	stream = load_audio_stream(file_path)
 	seek(0)
 	audio_changed.emit()
 
 func get_duration() -> float:
 	"""音乐总长度"""
-	return stream.get_length() if current_file else 0
+	return 0 if not current_file or not stream else stream.get_length()
 
 func get_current_time() -> float:
 	"""音乐当前进度"""
@@ -59,6 +59,16 @@ func stop_audio():
 	stop()
 	audio_stoped.emit()
 
+func load_audio_stream(file_path:String):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var sound:AudioStream
+	match file_path.get_extension():
+		"mp3": sound = AudioStreamMP3.new()
+		"wav": sound = AudioStreamWAV.new()
+		_: 
+			return 
+	sound.data = file.get_buffer(file.get_length())
+	return sound
 
 
 

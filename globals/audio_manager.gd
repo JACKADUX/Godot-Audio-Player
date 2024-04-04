@@ -35,6 +35,18 @@ func prev_audio():
 func get_current_audio_path():
 	return audio_datas[current_index].path
 
+func load_audio_stream(file_path:String):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var sound:AudioStream
+	match file_path.get_extension():
+		"mp3": sound = AudioStreamMP3.new()
+		"wav": sound = AudioStreamWAV.new()
+		_: 
+			return 
+	sound.data = file.get_buffer(file.get_length())
+	return sound
+
+
 
 func load_audio_folder(path:String):
 	audio_datas = []
@@ -43,12 +55,16 @@ func load_audio_folder(path:String):
 		if file.get_extension() not in AudioFormats:
 			continue
 		var file_path = path.path_join(file)
-		var file_stream :AudioStream= load(file_path)
+		var file_stream :AudioStream= load_audio_stream(file_path)
+		if not file_stream:
+			push_error("not supported type:", file_path)
+			continue
 		var audio_data = {}
 		audio_data["path"] = file_path
 		audio_data["title"] = file.get_file().get_basename()
 		audio_data["author"] = "-"
 		audio_data["duration"] = file_stream.get_length()
+		print(audio_data)
 		audio_datas.append(audio_data)
 	audio_datas_changed.emit()
 
