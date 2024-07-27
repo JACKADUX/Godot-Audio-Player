@@ -131,7 +131,7 @@ func fold():
 	
 func unfold():
 	audio_infos_manager.show()
-	DisplayServer.window_set_size(Vector2(400, 400), 0)
+	DisplayServer.window_set_size(Vector2(400, 800), 0)
 
 func _update_list_icon():
 	for child in audio_infos_manager.get_children():

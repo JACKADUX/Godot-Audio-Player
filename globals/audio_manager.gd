@@ -65,7 +65,7 @@ func load_audio_folder(path:String):
 		audio_data["title"] = file.get_file().get_basename()
 		audio_data["author"] = "-"
 		audio_data["duration"] = file_stream.get_length()
-		print(audio_data)
+		#print(audio_data)
 		audio_datas.append(audio_data)
 	audio_datas_changed.emit()
 
