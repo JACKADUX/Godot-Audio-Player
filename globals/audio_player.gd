@@ -65,6 +65,7 @@ func load_audio_stream(file_path:String):
 	match file_path.get_extension():
 		"mp3": sound = AudioStreamMP3.new()
 		"wav": sound = AudioStreamWAV.new()
+		"ogg": return AudioStreamOggVorbis.load_from_file(file_path)
 		_: 
 			return 
 	sound.data = file.get_buffer(file.get_length())

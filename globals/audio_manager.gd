@@ -3,7 +3,7 @@ extends Node
 signal index_changed
 signal audio_datas_changed
 
-const AudioFormats := ["mp3", "wav"]
+const AudioFormats := ["mp3", "wav", "ogg"]
 
 var audio_datas = []
 var current_index = -1
@@ -41,6 +41,7 @@ func load_audio_stream(file_path:String):
 	match file_path.get_extension():
 		"mp3": sound = AudioStreamMP3.new()
 		"wav": sound = AudioStreamWAV.new()
+		"ogg": return AudioStreamOggVorbis.load_from_file(file_path)
 		_: 
 			return 
 	sound.data = file.get_buffer(file.get_length())
